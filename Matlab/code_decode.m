@@ -3,7 +3,9 @@ function x()
 yn = zeros(64,1);
 y_coded = [];
 y_decoded = [];
-[y,Fs] = audioread('C:\Users\parisfe\Desktop\Maestria\adquisicion y proc datos\Proyecto2\muestra.wav');
+[y,Fs] = audioread('muestra.wav');
+soundsc(y);
+csvwrite('file.csv',y)
 
 % codec
 for n = 64:64:length(y)
@@ -15,6 +17,8 @@ for n = 64:64:length(y)
         y_coded = cat(2,y_coded,Y); % concatenate y_tmp to output
     end
 end
+
+xx = quantifier(y_coded);
 
 disp('length y_coded: ');
 disp(length(y_coded));
@@ -32,5 +36,5 @@ end
 
 disp('length y: ');
 disp(length(y));     
-
-audiowrite('C:\Users\parisfe\Desktop\Maestria\adquisicion y proc datos\Proyecto2\decodec2_32.wav',y_decoded,Fs);
+soundsc(y_decoded)
+audiowrite('decodec2_32.wav',y_decoded,Fs);
