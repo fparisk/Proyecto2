@@ -1,6 +1,11 @@
 #ifndef CODEC
 #define CODEC
 
+#define FIXED_POINT 32
+#include "stdint.h"
+#include "kiss_fft\kiss_fftr.h"
+
+
 const int nfft = 32;
 
 static
