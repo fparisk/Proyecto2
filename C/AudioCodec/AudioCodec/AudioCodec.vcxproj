@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClCompile Include="Decoder.cpp" />
     <ClCompile Include="Encoder.cpp" />
+    <ClCompile Include="FileUtilities.cpp" />
     <ClCompile Include="kiss_fft\kiss_fft.c" />
     <ClCompile Include="kiss_fft\kiss_fftr.c" />
     <ClCompile Include="Main.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="Codec.h" />
     <ClInclude Include="Decoder.h" />
     <ClInclude Include="Encoder.h" />
+    <ClInclude Include="FileUtilities.h" />
     <ClInclude Include="kiss_fft\kiss_fft.h" />
     <ClInclude Include="kiss_fft\kiss_fftr.h" />
     <ClInclude Include="kiss_fft\_kiss_fft_guts.h" />

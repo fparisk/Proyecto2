@@ -5,8 +5,13 @@
 #include "stdint.h"
 #include "kiss_fft\kiss_fftr.h"
 
+#define f_int int32_t
+//#define CONV_V 4294967296
 
-const int nfft = 32;
+//#define f_int int16_t
+#define CONV_V 65536
+
+#define SIZE 32640
 
 static
 kiss_fft_scalar rand_scalar(void)

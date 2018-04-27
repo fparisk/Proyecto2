@@ -1,6 +1,7 @@
 #include "Decoder.h"
 #include "Encoder.h"
 #include "WaveWrite.h"
+#include "FileUtilities.h"
 #include <stdlib.h>
 
 // -------------------------------------------------------- [ Section: Main ] -
@@ -41,16 +42,16 @@ void CreateWave(float *samples)
 }
 
 
-void TestSamples(int16_t samples[])
+void TestSamples(f_int samples[])
 {
-	int16_t data[nfft] = { 50, 60, 70, 79, 86, 92, 97, 99, 100, 98, 95, 90, 83, 74, 65,
+	f_int data[32] = { 50, 60, 70, 79, 86, 92, 97, 99, 100, 98, 95, 90, 83, 74, 65,
 						 55, 45, 35, 26, 17, 10, 5, 2, 0, 1, 3, 8, 14, 21, 30, 40, 50 };
 	samples = data;
 }
 
-float Convert(int32_t value)
+float Convert(f_int value)
 {
-	float fvalue = (float)value / 65536;
+	float fvalue = (float)value / CONV_V;
 	return fvalue;
 }
 
@@ -70,12 +71,14 @@ int main()
 {
 	//int16_t *samples = static_cast<int16_t *>(malloc(nfft * sizeof(*samples)));
 	//int16_t *samples = (int16_t*)malloc(nfft * (sizeof(int16_t)));
-	int16_t samples[nfft] = { 50, 60, 70, 79, 86, 92, 97, 99, 100, 98, 95, 90, 83, 74, 65,
+
+	//const int SIZE = 32640;
+	f_int samples[32] = { 50, 60, 70, 79, 86, 92, 97, 99, 100, 98, 95, 90, 83, 74, 65,
 		55, 45, 35, 26, 17, 10, 5, 2, 0, 1, 3, 8, 14, 21, 30, 40, 50 };
 
 	FILE* stream = fopen("stest.csv", "r");
 
-	int32_t tsamps[32640];
+	f_int tsamps[SIZE];
 
 	int ti = 0;
 	char line[1024];
@@ -87,26 +90,27 @@ int main()
 		free(tmp);
 	}
 
-	kiss_fft_scalar rin[nfft];
-	kiss_fft_cpx sout[nfft];
-	kiss_fft_scalar rout[nfft];
+	kiss_fft_scalar rin[SIZE];
+	kiss_fft_cpx sout[SIZE];
+	kiss_fft_scalar rout[SIZE];
 
 	//TestSamples(samples);
 
-	for(int i = 0; i<nfft; ++i) 
+	for(int i = 0; i<SIZE; ++i)
 	{
-		rin[i] = samples[i];
+		rin[i] = tsamps[i];
 	}
 
-	EncodeSamples(nfft, rin, sout);
-	DecodeSamples(nfft, sout, rout);
+	EncodeSamples(SIZE, rin, sout);
+	DecodeSamples(SIZE, sout, rout);
 
-	float fsamples[nfft];
-	for (int i = 0; i<nfft; ++i) 
+	float fsamples[SIZE];
+	for (int i = 0; i<SIZE; ++i)
 	{
 		fsamples[i] = Convert(rout[i]);
 	}
 
+	WriteFile(SIZE, fsamples, "mtest.csv");
 	CreateWave(fsamples);
 
 	return 0;
