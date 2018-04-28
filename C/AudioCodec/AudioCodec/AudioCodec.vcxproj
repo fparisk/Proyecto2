@@ -117,25 +117,22 @@
   <ItemGroup>
     <ClCompile Include="Decoder.cpp" />
     <ClCompile Include="Encoder.cpp" />
-    <ClCompile Include="kiss_fft\kfc.c" />
-    <ClCompile Include="kiss_fft\kiss_fastfir.c" />
     <ClCompile Include="kiss_fft\kiss_fft.c" />
-    <ClCompile Include="kiss_fft\kiss_fftnd.c" />
-    <ClCompile Include="kiss_fft\kiss_fftndr.c" />
     <ClCompile Include="kiss_fft\kiss_fftr.c" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="WaveRead.cpp" />
+    <ClCompile Include="WaveWrite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Codec.h" />
     <ClInclude Include="Decoder.h" />
     <ClInclude Include="Encoder.h" />
-    <ClInclude Include="kiss_fft\kfc.h" />
-    <ClInclude Include="kiss_fft\kissfft.hh" />
+    <ClInclude Include="FileUtilities.h" />
     <ClInclude Include="kiss_fft\kiss_fft.h" />
-    <ClInclude Include="kiss_fft\kiss_fftnd.h" />
-    <ClInclude Include="kiss_fft\kiss_fftndr.h" />
     <ClInclude Include="kiss_fft\kiss_fftr.h" />
     <ClInclude Include="kiss_fft\_kiss_fft_guts.h" />
+    <ClInclude Include="WaveRead.h" />
+    <ClInclude Include="WaveWrite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

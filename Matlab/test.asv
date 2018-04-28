@@ -1,0 +1,13 @@
+%[signal,Fs] = audioread('test.wav','native');
+%plot(signal)
+%sound(signal);
+x = linspace(0,2*pi,32);
+%Define y as the sine function evaluated at the values in x.
+
+y = round(1000*sin(x));
+%Plot y versus the corresponding values in x.
+
+subplot(3,1,1);
+plot(y)
+
+yf = rfft(y,)
