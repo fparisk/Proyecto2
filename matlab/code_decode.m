@@ -17,8 +17,6 @@ for n = 64:64:length(y)
     end
 end
 
-xx = quantifier(y_coded);
-
 disp('length y_coded: ');
 disp(length(y_coded));
 
@@ -33,7 +31,15 @@ for i = 33:33:length(y_coded)
     end
 end
 
+figure(1)
+plot(y)
+figure(2)
+plot(y_decoded)
+csvwrite('y_decoded.csv',y_decoded)
+
 disp('length y: ');
-disp(length(y));     
+disp(length(y));
+disp('length y decoded: ');
+disp(length(y_decoded))
 
 audiowrite('C:\Users\parisfe\Desktop\Maestria\adquisicion y proc datos\Proyecto2\decodec2_32.wav',y_decoded,Fs);

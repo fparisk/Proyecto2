@@ -38,4 +38,7 @@
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="muestras.csv" />
+  </ItemGroup>
 </Project>

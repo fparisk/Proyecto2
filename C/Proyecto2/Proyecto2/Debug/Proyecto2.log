@@ -1,1 +1,5 @@
-﻿  Proyecto2.vcxproj -> C:\Users\parisfe\Desktop\Maestria\adquisicion y proc datos\Proyecto2\C\Proyecto2\Debug\Proyecto2.exe
+﻿  main.c
+c:\users\parisfe\desktop\maestria\adquisicion y proc datos\proyecto2\c\main.c(9): warning C4013: 'malloc' undefined; assuming extern returning int
+c:\users\parisfe\desktop\maestria\adquisicion y proc datos\proyecto2\c\main.c(11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\parisfe\desktop\maestria\adquisicion y proc datos\proyecto2\c\main.c(19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Proyecto2.vcxproj -> C:\Users\parisfe\Desktop\Maestria\adquisicion y proc datos\Proyecto2\C\Proyecto2\Debug\Proyecto2.exe
