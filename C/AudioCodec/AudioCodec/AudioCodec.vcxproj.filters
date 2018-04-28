@@ -24,25 +24,22 @@
     <ClCompile Include="Encoder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="kiss_fft\kfc.c">
-      <Filter>FFT</Filter>
-    </ClCompile>
-    <ClCompile Include="kiss_fft\kiss_fastfir.c">
-      <Filter>FFT</Filter>
-    </ClCompile>
     <ClCompile Include="kiss_fft\kiss_fft.c">
-      <Filter>FFT</Filter>
-    </ClCompile>
-    <ClCompile Include="kiss_fft\kiss_fftnd.c">
-      <Filter>FFT</Filter>
-    </ClCompile>
-    <ClCompile Include="kiss_fft\kiss_fftndr.c">
       <Filter>FFT</Filter>
     </ClCompile>
     <ClCompile Include="kiss_fft\kiss_fftr.c">
       <Filter>FFT</Filter>
     </ClCompile>
     <ClCompile Include="Decoder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveWrite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileUtilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveRead.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,28 +50,25 @@
     <ClInclude Include="kiss_fft\_kiss_fft_guts.h">
       <Filter>FFT</Filter>
     </ClInclude>
-    <ClInclude Include="kiss_fft\kfc.h">
-      <Filter>FFT</Filter>
-    </ClInclude>
     <ClInclude Include="kiss_fft\kiss_fft.h">
       <Filter>FFT</Filter>
     </ClInclude>
-    <ClInclude Include="kiss_fft\kiss_fftnd.h">
-      <Filter>FFT</Filter>
-    </ClInclude>
-    <ClInclude Include="kiss_fft\kiss_fftndr.h">
-      <Filter>FFT</Filter>
-    </ClInclude>
     <ClInclude Include="kiss_fft\kiss_fftr.h">
-      <Filter>FFT</Filter>
-    </ClInclude>
-    <ClInclude Include="kiss_fft\kissfft.hh">
       <Filter>FFT</Filter>
     </ClInclude>
     <ClInclude Include="Decoder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Codec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveWrite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveRead.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
