@@ -2,14 +2,15 @@
 #include "Encoder.h"
 #include "WaveWrite.h"
 #include "FileUtilities.h"
+#include "WaveRead.h"
 #include <stdlib.h>
 
 // -------------------------------------------------------- [ Section: Main ] -
 void CreateWave(float *samples) 
 {
 	// Define some variables for the sound
-	float sampleRate = 44100.0; // hertz
-	float freq = 440.0;         // hertz
+	float sampleRate = 8000.0; // hertz
+	//float freq = 440.0;         // hertz
 	float duration = 1;       // seconds
 
 	//int nSamples = (int)(duration*sampleRate);
@@ -42,16 +43,29 @@ void CreateWave(float *samples)
 }
 
 
-void TestSamples(f_int samples[])
+void TestSamples(datatype samples[])
 {
-	f_int data[32] = { 50, 60, 70, 79, 86, 92, 97, 99, 100, 98, 95, 90, 83, 74, 65,
+	datatype data[32] = { 50, 60, 70, 79, 86, 92, 97, 99, 100, 98, 95, 90, 83, 74, 65,
 						 55, 45, 35, 26, 17, 10, 5, 2, 0, 1, 3, 8, 14, 21, 30, 40, 50 };
 	samples = data;
 }
 
-float Convert(f_int value)
+float Convert(datatype value)
 {
-	float fvalue = (float)value / CONV_V;
+	
+	float fvalue = (float)value;
+#ifdef FIXED_POINT
+	fvalue = fvalue/SIZE - OFFSET;
+#endif
+	return fvalue;
+}
+
+float ConvertComplex(datatype value)
+{
+	float fvalue = (float)value;
+#ifdef FIXED_POINT
+	fvalue = fvalue/ 65536;
+#endif
 	return fvalue;
 }
 
@@ -73,12 +87,21 @@ int main()
 	//int16_t *samples = (int16_t*)malloc(nfft * (sizeof(int16_t)));
 
 	//const int SIZE = 32640;
-	f_int samples[32] = { 50, 60, 70, 79, 86, 92, 97, 99, 100, 98, 95, 90, 83, 74, 65,
+	datatype samples[32] = { 50, 60, 70, 79, 86, 92, 97, 99, 100, 98, 95, 90, 83, 74, 65,
 		55, 45, 35, 26, 17, 10, 5, 2, 0, 1, 3, 8, 14, 21, 30, 40, 50 };
 
-	FILE* stream = fopen("stest.csv", "r");
+	WavFile *myWav = (WavFile*)malloc(sizeof(WavFile));
+	loadWavFile("muestra.wav",myWav);
 
-	f_int tsamps[SIZE];
+	int *data = (int *)malloc(sizeof(int)*(myWav->subchunk2Size));
+	for (int i = 0; i < myWav->subchunk2Size; i++)
+	{
+		data[i] = myWav->data[i];
+	}
+
+	FILE* stream = fopen("matlabSamples.csv", "r");
+
+	int16_t tsamps[SIZE];
 
 	int ti = 0;
 	char line[1024];
@@ -90,27 +113,63 @@ int main()
 		free(tmp);
 	}
 
+	//float ttsamples[SIZE];
+
+	float fsamples[SIZE];
+	float isamples[SIZE];
+
 	kiss_fft_scalar rin[SIZE];
 	kiss_fft_cpx sout[SIZE];
 	kiss_fft_scalar rout[SIZE];
 
 	//TestSamples(samples);
-
+	
+	int sum  = 0;
 	for(int i = 0; i<SIZE; ++i)
 	{
 		rin[i] = tsamps[i];
+		//rin[i] = data[i*4];
+		//insamples[i] = (float)(data[i]);
+		fsamples[i] = (float)rin[i];
+		sum += tsamps[i];
 	}
+
+	WriteSingleColumn(SIZE, fsamples, "readSamples.csv");
 
 	EncodeSamples(SIZE, rin, sout);
 	DecodeSamples(SIZE, sout, rout);
 
-	float fsamples[SIZE];
+	
+	for (int i = 0; i<SIZE; ++i)
+	{
+		fsamples[i] = ConvertComplex(sout[i].r);
+		isamples[i] = ConvertComplex(sout[i].i);
+	}
+
+	WriteDualColumn(SIZE, fsamples,isamples, "fftSamples.csv");
+
+
 	for (int i = 0; i<SIZE; ++i)
 	{
 		fsamples[i] = Convert(rout[i]);
 	}
 
-	WriteFile(SIZE, fsamples, "mtest.csv");
+	//float isamples[SIZE];
+	//for (int i = 0; i<SIZE; ++i)
+	//{
+	//	isamples[i] = Convert(sout[i].i);
+	//}
+
+	//WriteFile(SIZE, isamples, "itest.csv");
+
+	//for (int i = 0; i<SIZE; ++i)
+	//{
+	//	isamples[i] = Convert(sout[i].r);
+	//}
+
+	//WriteFile(SIZE, isamples, "rtest.csv");
+
+	WriteSingleColumn(SIZE, fsamples, "OutSamples.csv");
 	CreateWave(fsamples);
 
 	return 0;

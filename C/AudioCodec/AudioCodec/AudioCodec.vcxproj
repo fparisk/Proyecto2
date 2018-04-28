@@ -121,6 +121,7 @@
     <ClCompile Include="kiss_fft\kiss_fft.c" />
     <ClCompile Include="kiss_fft\kiss_fftr.c" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="WaveRead.cpp" />
     <ClCompile Include="WaveWrite.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +132,7 @@
     <ClInclude Include="kiss_fft\kiss_fft.h" />
     <ClInclude Include="kiss_fft\kiss_fftr.h" />
     <ClInclude Include="kiss_fft\_kiss_fft_guts.h" />
+    <ClInclude Include="WaveRead.h" />
     <ClInclude Include="WaveWrite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

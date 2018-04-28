@@ -5,13 +5,19 @@
 #include "stdint.h"
 #include "kiss_fft\kiss_fftr.h"
 
-#define f_int int32_t
-//#define CONV_V 4294967296
 
-//#define f_int int16_t
-#define CONV_V 65536
+#ifdef FIXED_POINT
+#if(FIXED_POINT == 32)
+#define datatype int32_t
+#else	
+#define datatype int16_t
+#endif
+#else
+#define datatype float
+#endif
 
 #define SIZE 32640
+#define OFFSET 64
 
 static
 kiss_fft_scalar rand_scalar(void)
