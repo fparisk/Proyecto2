@@ -3,7 +3,7 @@ function x()
 yn = zeros(64,1);
 y_coded = [];
 y_decoded = [];
-[y,Fs] = audioread('C:\Users\parisfe\Desktop\Maestria\adquisicion y proc datos\Proyecto2\matlab\muestra.wav');
+[y,Fs] = audioread('muestra.wav');
 
 y_mono = sum(y, 2) / size(y, 2);
 
@@ -53,4 +53,4 @@ csvwrite('coded_samples.csv',y_coded)
 csvwrite('in_samples_mono.csv',y_mono)
 csvwrite('decoded_samples.csv',y_decoded)
 
-audiowrite('C:\Users\parisfe\Desktop\Maestria\adquisicion y proc datos\Proyecto2\matlab\out.wav',y_decoded,Fs);
+audiowrite('out.wav',y_decoded,Fs);
